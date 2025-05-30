@@ -5,20 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Котлетка 🐾</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff8f0; color: #333; }
-    header, nav, footer { background: #ffdab9; padding: 1rem; text-align: center; }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff8f0; color: #333; cursor: none; overflow-x: hidden; }
+    header, nav, footer { background: #ffdab9; padding: 1rem; text-align: center; position: relative; z-index: 2; }
     nav a { margin: 0 1rem; text-decoration: none; color: #333; font-weight: bold; }
-    section { padding: 2rem; }
+    section { padding: 2rem; position: relative; z-index: 2; }
     h1, h2 { color: #a0522d; }
     .gallery img { max-width: 200px; margin: 1rem; border-radius: 10px; }
     form input, form textarea { display: block; margin-bottom: 1rem; width: 100%; max-width: 400px; padding: 0.5rem; }
     form button { padding: 0.5rem 1rem; }
+    .header-wrapper { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; text-align: left; }
+    .header-wrapper img { max-height: 120px; border-radius: 10px; margin-left: 1rem; }
+    .header-text { flex-grow: 1; }
+    .trail { position: absolute; width: 10px; height: 10px; border-radius: 50%; pointer-events: none; }
+    #cat-walker { position: absolute; top: 0; left: -100px; height: 60px; z-index: 3; animation: walk 20s linear infinite; }
+    @keyframes walk { from { left: -100px; } to { left: 100vw; } }
+    .mouse { position: absolute; width: 40px; height: 40px; background: url('mouse.png') no-repeat center/contain; animation: fall linear infinite; z-index: 1; }
+    @keyframes fall { 0% { transform: translateY(-40px); opacity: 1; } 100% { transform: translateY(100vh); opacity: 0; } }
   </style>
 </head>
 <body>
+  <img id="cat-walker" src="Kotlata_i_devops.jpg" alt="гуляющий кот">
   <header>
-    <h1>Привет, я Котлетка 🐾</h1>
-    <p>Самая милая и дерзкая бенгальская кошка в интернете!</p>
+    <div class="header-wrapper">
+      <div class="header-text">
+        <h1>Привет, я Котлетка 🐾</h1>
+        <p>Самая милая и дерзкая бенгальская кошка в интернете!</p>
+      </div>
+      <img src="Kotlata_i_devops.jpg" alt="Котлетка и Девопс">
+    </div>
   </header>
 
   <nav>
@@ -31,9 +45,9 @@
   <section id="gallery">
     <h2>📸 Фотоальбом</h2>
     <div class="gallery">
-      <img src="https://placekitten.com/300/200" alt="Котлетка 1">
-      <img src="https://placekitten.com/301/201" alt="Котлетка 2">
-      <img src="https://placekitten.com/302/202" alt="Котлетка 3">
+      <img src="Kotleta_v_vannoi.jpg" alt="Котлетка в ванной">
+      <img src="Kotleta_cho_nado.jpg" alt="Котлетка смотрит строго">
+      <img src="Kotleta_ohotitsa.jpg" alt="Котлетка охотится">
     </div>
   </section>
 
@@ -68,5 +82,29 @@
   <footer>
     <p>© 2025 Котлетка и её человек 🐾</p>
   </footer>
+
+  <script>
+    // Курсор с хвостом
+    const colors = ["#ff69b4", "#ffa500", "#9370db", "#00ced1"];
+    window.addEventListener("mousemove", e => {
+      const dot = document.createElement("div");
+      dot.classList.add("trail");
+      dot.style.left = e.pageX + "px";
+      dot.style.top = e.pageY + "px";
+      dot.style.background = colors[Math.floor(Math.random() * colors.length)];
+      document.body.appendChild(dot);
+      setTimeout(() => dot.remove(), 500);
+    });
+
+    // Дождь из картинки мышки (mouse.png)
+    setInterval(() => {
+      const mouse = document.createElement("div");
+      mouse.className = "mouse";
+      mouse.style.left = Math.random() * window.innerWidth + "px";
+      mouse.style.animationDuration = (3 + Math.random() * 2) + "s";
+      document.body.appendChild(mouse);
+      setTimeout(() => mouse.remove(), 6000);
+    }, 300);
+  </script>
 </body>
 </html>
