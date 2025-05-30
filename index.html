@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Котлетка 🐾</title>
   <style>
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff8f0; color: #333; cursor: none; overflow-x: hidden; }
     header, nav, footer { background: #ffdab9; padding: 1rem; text-align: center; position: relative; z-index: 2; }
     nav a { margin: 0 1rem; text-decoration: none; color: #333; font-weight: bold; }
@@ -19,8 +24,20 @@
     .trail { position: absolute; width: 10px; height: 10px; border-radius: 50%; pointer-events: none; }
     #cat-walker { position: absolute; top: 0; left: -100px; height: 60px; z-index: 3; animation: walk 20s linear infinite; }
     @keyframes walk { from { left: -100px; } to { left: 100vw; } }
-    .mouse { position: absolute; width: 40px; height: 40px; background: url('mouse.png') no-repeat center/contain; animation: fall linear infinite; z-index: 1; }
-    @keyframes fall { 0% { transform: translateY(-40px); opacity: 1; } 100% { transform: translateY(100vh); opacity: 0; } }
+    .mouse {
+      position: fixed;
+      top: -40px;
+      width: 40px;
+      height: 40px;
+      background: url('mouse.png') no-repeat center/contain;
+      animation: fall linear infinite;
+      z-index: 1;
+      pointer-events: none;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0px); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
   </style>
 </head>
 <body>
